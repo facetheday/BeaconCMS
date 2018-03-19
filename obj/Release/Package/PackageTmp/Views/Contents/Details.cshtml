@@ -1,0 +1,62 @@
+﻿@model CMS.Models.Content
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Content</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+
+    <p>
+        @Html.ActionLink("Add new url", "CreatePersonalizedContent", new { id = Model.ID })
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Client group")
+            </th>
+            <th>
+                @Html.DisplayName("URL")
+            </th>
+            <th>
+                @Html.DisplayName("Protection period (minutes)")
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.URL)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Group.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UrlValue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProtectionPeriod)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "DeletePersonalizedContent", new { id = item.Id, contentID = Model.ID })
+            </td>
+        </tr>
+        }
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

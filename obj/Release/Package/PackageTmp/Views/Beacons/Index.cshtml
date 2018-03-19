@@ -1,0 +1,84 @@
+﻿@model IEnumerable<CMS.Models.Beacon>
+
+@{
+    ViewBag.Title = "Beacons";
+}
+
+<h2>Beacons</h2>
+
+<p>
+    @Html.ActionLink("Update beacon list from Kontakt IO cloud", "ImportBeacons")
+</p>
+
+
+@using (Html.BeginForm())
+{
+    <table style="width:350px; height:100px; margin-bottom:2em">
+        <tr>
+            <td>Find by BeaconID:</td>
+            <td>@Html.TextBox("searchByBeaconId")</td>
+        </tr>
+        <tr>
+            <td>Find by MajorID:</td>
+            <td>@Html.TextBox("searchByMajor")</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Search" class="btn btn-default"/></td>
+        </tr>
+    </table>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BeaconID)
+        </th>
+        <th>
+            @Html.ActionLink("MajorID", "Index", new { sortOrder = ViewBag.majorIdParm })
+        </th>
+        <th>
+            @Html.ActionLink("MinorID", "Index", new { sortOrder = ViewBag.minorIdParm })
+        </th>
+        <th>
+            @Html.ActionLink("Content", "Index", new { sortOrder = ViewBag.contentParm })
+        </th>
+        <th>
+            @Html.ActionLink("Notification", "Index", new { sortOrder = ViewBag.notificationParm })
+        </th>
+        <th>
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BeaconID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Major)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Minor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Notification.Title)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
